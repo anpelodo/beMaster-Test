@@ -1,0 +1,44 @@
+table users{
+  id bigint [PK]
+  userName varchar[20]
+  fullName varchar[50]
+  email varchar[100]
+  created_at timestamp [default: 'now()']
+}
+
+table comments{
+  id bigint [PK]
+  author_id bigint [ref: > users.id]
+  video_id bigint [ref: > videos.id]
+  created_at timestamp [default: 'now()']
+  comment varchar[255]
+  deleted boolean [default: False ,note: 'Never delete a comment, only mark as deleted']
+}
+
+table reviews{
+  id bigint [PK]
+  author_id bigint [
+    ref: > users.id, 
+    note: 'only collaborators of the video can edit or create a review'
+  ]
+  lastEdited_by bigint [ref: > users.id]
+  created_at timestamp [default: 'now()']
+  lastEdited_at timestamp [default: 'now()', null]
+  video_id bigint [ref: - videos.id]
+  review varchar
+  }
+
+table collaborators{
+  id bigint [PK]
+  user_id bigint [ref: > users.id]
+  video_id bigint [ref: > videos.id]
+  created_at timestamp [default: 'now()']
+}
+
+table videos{
+  id bigint [PK]
+  author_id bigint [ref: > users.id]
+  title varchar[100]
+  description varchar[255]
+  created_at timestamp [default: 'now()']
+}
