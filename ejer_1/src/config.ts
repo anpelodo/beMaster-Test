@@ -3,6 +3,6 @@ export const config = {
     port: process.env.PORT || 3000
   },
   github: {
-    apiKey: ""
+    apiKey: process.env.GITHUB_APIKEY || ""
   }
 };

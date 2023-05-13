@@ -5,7 +5,7 @@ function f(x, y, z) {
   return c;
 }
 
-function getComputed(x: number, y: number, z: number) {
+function computeValues(x: number, y: number, z: number) {
   const sum = x + y;
   const prod = sum * z;
   const result = Math.sin(prod);
